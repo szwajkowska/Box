@@ -25,9 +25,9 @@ public class Box {
     public void putBox(Box innerBox) {
         if (innerBox.boxVolume < boxVolume && isEmpty()) {
             centre = innerBox;
-            System.out.println("Umieszczono pudełkow  w pudełku");
+            System.out.println("Umieszczono pudełko  w pudełku");
         } else {
-            System.out.println("Nie umieszczono pudełka w pudełku");
+            System.out.println("Nie umieszczono pudełka w pudełku. Pudełko wewnętrzne jest zbyt duże");
         }
 
     }
@@ -60,6 +60,7 @@ public class Box {
         Box innerBox = centre;
         if (centre != null) {
             centre = null;
+            System.out.println("Usunięto pudelko wewnetrzne");
         }
         return innerBox;
     }
@@ -72,8 +73,10 @@ public class Box {
         }
         else if (newBox !=null && !isEmpty()){
             if (newBox.boxVolume < boxVolume && newBox.boxVolume > centre.centre.boxVolume && !centre.isEmpty()){
-                putBox(newBox);
                 newBox.putBox(centre.centre);
+                centre = newBox;
+
+                System.out.println("Wymieniono pudełko");
             }
         }
         return oldCentre;
